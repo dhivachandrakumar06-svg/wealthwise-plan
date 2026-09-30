@@ -145,11 +145,11 @@ export function monteCarlo(opts: {
     let v = 0;
     for (let m = 1; m <= years * 12; m++) {
       v = (v + monthly) * Math.exp(mu + sd * gauss());
-      if (m % 12 === 0) yearly[m / 12][s] = v;
+      if (m % 12 === 0) yearly[m / 12]![s] = v;
     }
     finals[s] = v;
   }
-  const q = (arr: Float64Array, p: number) => arr[Math.min(arr.length - 1, Math.floor(p * arr.length))];
+  const q = (arr: Float64Array, p: number): number => arr[Math.min(arr.length - 1, Math.floor(p * arr.length))] ?? 0;
   const fan = yearly.map((arr, y) => {
     const sorted = Float64Array.from(arr).sort();
     return { year: y, p10: q(sorted, 0.1), p25: q(sorted, 0.25), p50: q(sorted, 0.5), p75: q(sorted, 0.75), p90: q(sorted, 0.9), invested: monthly * 12 * y };

@@ -38,7 +38,7 @@ export function AmountSlider({ label, value, onChange, min, max, step, quick, pr
           {suffix && <span className="ml-1 text-sm text-muted-foreground">{suffix}</span>}
         </div>
       </div>
-      <Slider value={[value]} min={min} max={max} step={step} onValueChange={([v]) => onChange(v)} />
+      <Slider value={[value]} min={min} max={max} step={step} onValueChange={([v]) => onChange(v ?? min)} />
       <div className="flex justify-between text-xs text-muted-foreground num">
         <span>{display ? display(min) : min}</span>
         <span>{display ? display(max) : max}</span>

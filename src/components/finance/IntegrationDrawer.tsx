@@ -114,7 +114,7 @@ python app.py        # → http://localhost:5000/api`}</pre>
           <section className="space-y-2">
             <h3 className="text-lg">API routes</h3>
             <div className="divide-y rounded-lg border text-sm">
-              {ROUTES.map(([m, p, d]) => (
+              {ROUTES.map(([m = "", p = "", d = ""]) => (
                 <div key={p + m} className="flex flex-wrap items-baseline gap-2 p-2.5">
                   <span className={cn("num w-12 text-xs font-bold", m === "GET" ? "text-chart-3" : "text-chart-2")}>{m}</span>
                   <span className="num font-medium">{p}</span>
