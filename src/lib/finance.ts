@@ -86,7 +86,7 @@ export function calculateLocal(
 
 // ---------- Formatting (Indian system) ----------
 export function formatINR(n: number, digits = 0): string {
-  return "₹" + Math.round(n * 10 ** digits / 10 ** digits).toLocaleString("en-IN", { maximumFractionDigits: digits });
+  return (n < 0 ? "-₹" : "₹") + Math.abs(n).toLocaleString("en-IN", { maximumFractionDigits: digits, minimumFractionDigits: 0 });
 }
 export function formatCompact(n: number): string {
   const a = Math.abs(n);
