@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
 const preview = calculateLocal(5000, 15);
 
 function Home() {
-  const exp = preview.scenarios[1];
+  const exp = preview.scenarios[1]!;
   return (
     <div>
       <section className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 lg:grid-cols-[1.1fr_1fr] lg:py-24">

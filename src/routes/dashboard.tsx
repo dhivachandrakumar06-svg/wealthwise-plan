@@ -24,7 +24,8 @@ function DashboardPage() {
   const mode = useApiMode();
   const q = useQuery({ queryKey: ["simulations", mode], queryFn: getSimulations });
   const [, force] = useState(0);
-  useEffect(() => subscribeSaved(() => { force((x) => x + 1); q.refetch(); }), [q]);
+  const refetch = q.refetch;
+  useEffect(() => { const off = subscribeSaved(() => { force((x) => x + 1); void refetch(); }); return () => { off(); }; }, [refetch]);
   const list = q.data ?? [];
   const totalMonthly = list.reduce((s, x) => s + Number(x.monthly_investment), 0);
   const best = list.reduce((m, x) => Math.max(m, Number(x.expected_corpus) || 0), 0);

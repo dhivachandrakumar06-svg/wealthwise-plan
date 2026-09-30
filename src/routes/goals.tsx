@@ -26,9 +26,9 @@ const GOALS = [
 ];
 
 function GoalsPage() {
-  const [goal, setGoal] = useState(GOALS[0].key);
-  const [target, setTarget] = useState(GOALS[0].target);
-  const [years, setYears] = useState(GOALS[0].years);
+  const [goal, setGoal] = useState(GOALS[0]!.key);
+  const [target, setTarget] = useState(GOALS[0]!.target);
+  const [years, setYears] = useState(GOALS[0]!.years);
   const [inflation, setInflation] = useState(6);
   const adjusted = target * Math.pow(1 + inflation / 100, years);
 

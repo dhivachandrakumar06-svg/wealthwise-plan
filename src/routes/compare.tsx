@@ -33,7 +33,7 @@ function PlanEditor({ name, plan, set, color }: { name: string; plan: Plan; set:
         {rows.map((r) => (
           <div key={r.k} className="space-y-2">
             <div className="flex justify-between text-sm"><span className="text-muted-foreground">{r.label}</span><span className="num font-medium">{r.fmt}</span></div>
-            <Slider value={[r.v]} min={r.min} max={r.max} step={r.step} onValueChange={([v]) => set({ ...plan, [r.k]: r.k === "rate" ? v / 100 : v })} />
+            <Slider value={[r.v]} min={r.min} max={r.max} step={r.step} onValueChange={([v]) => set({ ...plan, [r.k]: r.k === "rate" ? (v ?? 0) / 100 : (v ?? 0) })} />
           </div>
         ))}
       </div>

@@ -27,7 +27,7 @@ function MonteCarloPage() {
   const [monthly, setMonthly] = useState(10000);
   const [years, setYears] = useState(15);
   const [target, setTarget] = useState(5000000);
-  const [risk, setRisk] = useState(RISK[1]);
+  const [risk, setRisk] = useState(RISK[1]!);
   const input = useDeferredValue({ monthly, years, target, risk });
   const r = useMemo(
     () => monteCarlo({ monthly: input.monthly, years: input.years, target: input.target, meanReturn: input.risk.mean, volatility: input.risk.vol, sims: 5000 }),
