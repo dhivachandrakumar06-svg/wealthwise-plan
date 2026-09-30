@@ -2,300 +2,297 @@
 
 ### *Can we see the future before we invest in it?*
 
-**WealthWise** is a financial decision simulator designed to help users understand how different financial decisions can affect their future wealth.
+**WealthWise** is a financial decision simulator that we built to make investing and financial planning easier to understand.
 
-Instead of providing only a single projected value, WealthWise allows users to **change assumptions, compare scenarios, and explore thousands of possible outcomes**.
+We noticed that many people can access financial products, but understanding what might happen to their money over time can still be confusing. Concepts like **compounding, inflation, returns, and risk** can feel complicated when they are presented only through formulas or a single final number.
+
+So, we came up with **WealthWise**.
+
+Instead of simply telling you *"your money may become this much,"* WealthWise lets you **change your assumptions, try different scenarios, and explore different possible outcomes.**
 
 ---
 
-## 🎯 Problem Statement
+## 💡 Why Did We Build WealthWise?
 
-Millions of people have access to financial products, but access does not always mean understanding.
+Imagine you are investing **₹5,000 every month for 15 years**.
 
-Financial decisions involve concepts such as:
+What happens if you invest ₹10,000 instead?
+
+What if you invest for 20 years?
+
+What if the returns are different from what you expected?
+
+These are the kinds of questions we wanted users to explore.
+
+Traditional calculators usually give you **one result**.
+
+WealthWise asks:
+
+> **"What if I change this?"**
+
+And then lets you see what could happen.
+
+---
+
+## 🎯 The Problem
+
+Millions of people have access to financial products, but many still find it difficult to understand financial decisions.
+
+Some of the important factors are:
 
 * 📈 Compounding
 * 💸 Inflation
-* ⚠️ Investment risk
+* ⚠️ Investment uncertainty
 * 🎯 Long-term financial goals
 
-The WealthWise project highlights the financial-literacy gap identified in the **NCFE-FLIS 2019 survey**, where 27.18% of respondents met the minimum financial-literacy threshold.
+The problem is not only **access to financial products**.
+
+It is also **understanding the decisions behind them**.
 
 ---
 
-## 💡 Our Idea
+## 🚀 What Does WealthWise Do?
 
-WealthWise changes the question from:
+WealthWise follows a simple process:
 
-> **"Give me one number."**
+```text
+INPUT
+  ↓
+Calculate
+  ↓
+Simulate
+  ↓
+Compare
+  ↓
+Adjust
+  ↓
+Explore Again
+```
 
-to:
+Users can enter things like:
 
-> **"Show me the possibilities."**
-
-Users can experiment with different investment assumptions and observe how those changes affect potential outcomes.
-
----
-
-## ✨ Key Features
-
-### 📊 Financial Calculations
-
-* SIP growth calculation
-* Compound-growth calculations
-* Inflation-adjusted values
-* Goal-based investment calculations
-* Scenario comparison
-
-### 🎲 Monte Carlo Simulation
-
-WealthWise generates **5,000 possible investment paths** rather than assuming that one expected return will always occur.
-
-The simulation:
-
-1. Samples a return path
-2. Compounds it over time
-3. Repeats the process thousands of times
-4. Summarizes the resulting distribution
-
-The output represents a **range of possible outcomes, not a guarantee**.
-
-### 🔄 Scenario Experimentation
-
-Users can modify variables such as:
-
-* Monthly SIP
-* Investment period
-* Expected return assumptions
+* Monthly investment
+* Investment duration
+* Expected return
 * Financial goals
 
-They can then compare the resulting scenarios and adjust their decisions.
+The system then calculates the results and allows users to explore different scenarios.
 
 ---
 
-## 🏗️ Technical Architecture
+## 🎲 The Interesting Part — Monte Carlo Simulation
 
-WealthWise follows a layered architecture:
+One of the main features of WealthWise is **Monte Carlo simulation**.
 
-```text
-┌──────────────────────────────┐
-│          FRONTEND            │
-│     React + TypeScript       │
-│   UI • Charts • Scenarios    │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│        API / BACKEND         │
-│        Python + Flask        │
-│ Routes • Validation • Logic  │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│       FINANCIAL ENGINE       │
-│ SIP • Compounding • Inflation│
-│          • Goals             │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│       SIMULATION ENGINE      │
-│         Monte Carlo          │
-│  Random Paths • Percentiles  │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│          DATA LAYER          │
-│            SQLite            │
-│   Plans • Scenario Data      │
-└──────────────────────────────┘
-```
+Real-world investment returns don't necessarily follow one fixed number every year.
 
-The overall API flow is:
+So instead of showing only one expected result, WealthWise creates **5,000 possible return paths**.
+
+The process is roughly:
 
 ```text
-Browser
-   ↓
-Backend
-   ↓
-Calculation / Simulation
-   ↓
-Response
-   ↓
-Visualization
+Generate a possible return path
+          ↓
+Compound it over time
+          ↓
+Repeat thousands of times
+          ↓
+Collect the results
+          ↓
+Show the range of possibilities
 ```
 
-The architecture and technology stack are based on the project presentation.
+This gives users a better way to understand uncertainty.
+
+**It is not predicting the future. It is helping users explore possible futures.**
 
 ---
 
-## 🧮 Financial Engine
+## 🧮 What Happens Behind the Scenes?
 
-WealthWise uses explicit financial models to make its calculations transparent and explainable.
+WealthWise has different layers working together.
 
-### SIP / Compounding
+```text
+React + TypeScript
+        ↓
+      Flask
+        ↓
+Financial Calculation Engine
+        ↓
+Monte Carlo Simulation
+        ↓
+SQLite Database
+```
+
+### Frontend
+
+The frontend handles the interface, inputs, charts, and scenario controls.
+
+### Backend
+
+The Python + Flask backend receives requests and manages the application logic.
+
+### Financial Engine
+
+This handles calculations such as:
+
+* SIP growth
+* Compounding
+* Inflation adjustment
+* Goal-based calculations
+
+### Simulation Engine
+
+The Monte Carlo engine generates different possible return paths and summarizes the results.
+
+### Database
+
+SQLite is used for storing saved plans and scenario data.
+
+---
+
+## 📊 Financial Calculations
+
+WealthWise uses standard financial calculations to make the results understandable and transparent.
+
+For example, SIP growth is calculated using a compounding-based formula:
 
 ```text
 FV = P × [((1+r)^n − 1) / r]
 ```
 
-Used to estimate the future value of recurring contributions.
+We also consider inflation so that users can understand the difference between a future amount and its purchasing power.
 
-### Inflation Adjustment
+The idea is simple:
+
+> **Transparent assumptions → Clear calculations → Understandable results**
+
+---
+
+## 👥 Who Is WealthWise For?
+
+We designed WealthWise with different kinds of users in mind.
+
+### 🎓 Students
+
+To understand investing and compounding in a simple way.
+
+### 💼 Young Earners
+
+To explore long-term investment scenarios.
+
+### 👨‍👩‍👧 Families
+
+To think about financial goals and inflation.
+
+### 🎯 Goal Planners
+
+To experiment with retirement or other long-term goals.
+
+The goal is not to tell users what decision to make.
+
+The goal is to help them **understand the possible outcomes of their decisions.**
+
+---
+
+## 🖥️ Our Prototype
+
+We created a working prototype where users can interact with the simulator.
+
+For example:
 
 ```text
-Real Value = Future Value / (1+i)^n
-```
-
-Used to represent the effect of inflation on future purchasing power.
-
-### Goal-Based Calculation
-
-The system can work backwards from a financial target to estimate the required recurring contribution.
-
-### Scenario Engine
-
-Different combinations of:
-
-```text
-Investment Amount
-        +
-Investment Period
-        +
-Return Assumption
+₹5,000 / month
+15 years
+10% assumption
         ↓
-   Scenario Result
-```
-
-This supports side-by-side assumption testing.
-
----
-
-## 🎲 Monte Carlo Simulation
-
-A major feature of WealthWise is its Monte Carlo simulation engine.
-
-Rather than assuming that an investment will always achieve one fixed return, the system explores multiple possible return paths.
-
-```text
-Return Path
-     ↓
-Compound Over Time
-     ↓
-Repeat Thousands of Times
-     ↓
-Generate Distribution
-     ↓
-Lower ── Median ── Higher
-```
-
-WealthWise uses **5,000 simulated futures** to visualize the distribution of possible outcomes.
-
----
-
-## 🖥️ Prototype
-
-The working prototype allows users to enter financial assumptions and interactively explore the results.
-
-Example demonstration:
-
-```text
-Monthly Investment: ₹5,000
-Investment Period: 15 years
-Return Assumption: 10%
-
+Calculate
         ↓
-
-Financial Engine
-
+Simulate
         ↓
-
-Simulation
-
-        ↓
-
-Result
+Explore the result
 ```
 
-The prototype also demonstrates how changing one assumption — for example, increasing the monthly investment from **₹5,000 to ₹10,000** — triggers a new calculation and result.
+One of the easiest ways to demonstrate WealthWise is to change the monthly investment from:
+
+**₹5,000 → ₹10,000**
+
+and immediately see how the result changes.
+
+This makes the concept much more interactive than a traditional calculator.
 
 ---
 
-## 👥 Who Can Use WealthWise?
+## 🌟 What Makes WealthWise Different?
 
-WealthWise is designed around different types of financial decision-makers:
+We don't want WealthWise to simply be another investment calculator.
 
-| User                  | Possible Use                                |
-| --------------------- | ------------------------------------------- |
-| 🎓 Students           | Understand basic investing and compounding  |
-| 👨‍💼 Young Earners   | Explore long-term wealth-building scenarios |
-| 👨‍👩‍👧 Families     | Consider goals and inflation                |
-| 🎯 Financial Planners | Test retirement and major financial goals   |
+The main idea is **experimentation**.
 
-The project focuses on **experimentation and understanding**, rather than simply producing one final number.
+Instead of:
 
----
+> ❌ "Here is your final number."
 
-## 🚀 Project Workflow
+We want users to experience:
 
-```text
-1. INPUT
-   ↓
-   Income • SIP • Years
+> ✅ "What happens if I change this?"
 
-2. CALCULATE
-   ↓
-   Growth • Inflation • Goals
-
-3. SIMULATE
-   ↓
-   5,000 Possible Paths
-
-4. COMPARE
-   ↓
-   Scenarios • Percentiles
-
-5. DECIDE
-   ↓
-   Adjust • Repeat
-```
-
-This workflow allows users to continuously test and refine their assumptions.
+They can try different assumptions, compare scenarios, and learn how financial decisions affect possible outcomes.
 
 ---
 
-## 🛠️ Technology Stack
+## 🛠️ Tech Stack
 
-| Layer            | Technology         |
+| Part             | Technology         |
 | ---------------- | ------------------ |
 | Frontend         | React + TypeScript |
 | UI / Prototype   | Lovable            |
-| Backend          | Python             |
-| API              | Flask              |
+| Backend          | Python + Flask     |
 | Financial Engine | Python             |
 | Simulation       | Monte Carlo        |
 | Database         | SQLite             |
 
 ---
 
-## 🌟 Why WealthWise?
+## 🔄 Our Workflow
 
-WealthWise does not attempt to eliminate financial uncertainty.
+```text
+1️⃣ Enter your financial details
+             ↓
+2️⃣ Calculate the expected growth
+             ↓
+3️⃣ Generate possible scenarios
+             ↓
+4️⃣ Compare the outcomes
+             ↓
+5️⃣ Change your assumptions
+             ↓
+6️⃣ Explore again
+```
 
-Instead, it aims to make uncertainty **visible and understandable**.
+That's the heart of WealthWise.
 
-Users can:
+---
 
-* **SEE** how assumptions affect outcomes
-* **TEST** different possible paths
-* **LEARN** the underlying financial concepts
-* **PLAN** around their financial goals
+## ⚠️ Important Note
 
-The core idea is:
+WealthWise is an **educational simulation tool**.
 
-> **"Don't just plan your money. Understand the future you're planning for."**
+The results shown by the simulator are hypothetical and depend on the assumptions provided by the user. They should not be considered guaranteed returns or personal financial advice.
+
+---
+
+## ❤️ Our Vision
+
+We believe financial planning shouldn't feel like looking at a complicated spreadsheet.
+
+It should be something people can **explore, understand, and learn from.**
+
+With WealthWise, we want to turn financial uncertainty into something people can interact with.
+
+> ### **Don't just plan your money.**
+>
+> ### **Understand the future you're planning for.**
 
 ---
 
@@ -303,36 +300,21 @@ The core idea is:
 
 🚧 **Working Prototype**
 
-The current project demonstrates the financial calculation pipeline, scenario experimentation, and Monte Carlo simulation concept through an interactive prototype.
-
----
-
-## ⚠️ Disclaimer
-
-WealthWise is an **educational and simulation tool**. Its calculations and simulated outcomes are intended to help users understand financial concepts and explore hypothetical scenarios.
-
-Simulated or projected results **do not represent guaranteed investment returns or financial advice**.
-
----
-
-## 👩‍💻 Team
-
-**WealthWise — Financial Decision Simulator**
-
-Built as a project focused on making financial concepts more understandable through interactive simulation and scenario exploration.
+Built as a hackathon project to demonstrate how financial calculations, scenario testing, and Monte Carlo simulation can be brought together into an interactive financial decision simulator.
 
 ---
 
 ## 📚 Sources
 
-* National Council for Financial Education (NCFE) — National Strategy for Financial Education 2020–25
-* NCFE Financial Literacy and Inclusion Survey (NCFE-FLIS) 2019
-* Association of Mutual Funds in India (AMFI) — Annual Mutual Fund Report 2025
+The statistics used in our project presentation include:
 
-The statistics and source references above are the ones identified in the project presentation.
+* **NCFE-FLIS 2019 / National Strategy for Financial Education 2020–25**
+* **AMFI Annual Mutual Fund Report 2025**
+
+These sources are referenced in the project presentation.
 
 ---
 
-### ⭐ WealthWise
+### 🌱 Built with an idea in mind:
 
-**Explore the possibilities. Understand the uncertainty. Plan with knowledge.**
+**Make financial decisions easier to understand — one scenario at a time.**
