@@ -69,7 +69,7 @@ function MonteCarloPage() {
               <p className="num -mt-6 text-4xl font-semibold">{pct(prob, 0)}</p>
               <p className="mt-1 text-center text-sm text-muted-foreground">chance of reaching {formatCompact(target)}</p>
             </div>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="grid grid-cols-2 content-center gap-3 sm:grid-cols-4">
               {[
                 { l: "Bad case (10th)", v: r.p10 },
                 { l: "Median (50th)", v: r.p50 },
