@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Calculations live in src/lib/finance.ts and mirror backend/app.py; all data access goes through src/services/api.ts (standalone vs Flask mode) — keeps UI identical regardless of backend.
