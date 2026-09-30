@@ -92,7 +92,7 @@ function MonteCarloPage() {
                 <XAxis dataKey="year" tickLine={false} axisLine={false} tickFormatter={(y) => `Y${y}`} tick={{ fontSize: 12, fill: "var(--muted-foreground)" }} />
                 <YAxis tickLine={false} axisLine={false} width={72} tickFormatter={formatCompact} tick={{ fontSize: 12, fill: "var(--muted-foreground)" }} />
                 <Tooltip contentStyle={{ background: "var(--card)", border: "1px solid var(--border)", borderRadius: 10 }} labelFormatter={(y) => `Year ${y}`}
-                  formatter={(v: number | number[], n) => [Array.isArray(v) ? `${formatCompact(v[0])} – ${formatCompact(v[1])}` : formatCompact(v), n]} />
+                  formatter={(v: number | number[], n) => [Array.isArray(v) ? `${formatCompact(v[0] ?? 0)} – ${formatCompact(v[1] ?? 0)}` : formatCompact(v), n]} />
                 <Area dataKey="band" name="10–90th" stroke="none" fill="var(--chart-3)" fillOpacity={0.15} />
                 <Area dataKey="inner" name="25–75th" stroke="none" fill="var(--chart-3)" fillOpacity={0.3} />
                 <Line dataKey="p50" name="Median" stroke="var(--chart-3)" strokeWidth={3} dot={false} />

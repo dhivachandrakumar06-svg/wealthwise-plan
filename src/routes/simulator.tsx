@@ -47,7 +47,7 @@ function SimulatorPage() {
         monthly_investment: monthly,
         years,
         scenarios,
-        expected_corpus: result.scenarios[1].final_corpus,
+        expected_corpus: result.scenarios[1]!.final_corpus,
         total_invested: result.total_invested,
       });
       toast.success("Simulation saved");
@@ -110,8 +110,8 @@ function SimulatorPage() {
             <GrowthChart data={result.series} />
           </div>
 
-          <Breakdown monthly={monthly} years={years} scenarios={scenarios} expected={result.scenarios[1]} series={result.series} />
-          <WaitToggle monthly={monthly} years={years} rate={scenarios[1].rate} />
+          <Breakdown monthly={monthly} years={years} scenarios={scenarios} expected={result.scenarios[1]!} series={result.series} />
+          <WaitToggle monthly={monthly} years={years} rate={scenarios[1]!.rate} />
         </div>
       </div>
     </div>
@@ -139,7 +139,7 @@ function Assumptions({ scenarios, setScenarios }: { scenarios: Scenario[]; setSc
           {scenarios.map((s, i) => (
             <div key={s.key} className="space-y-2">
               <div className="flex justify-between text-sm"><span>{s.label}</span><span className="num">{pct(s.rate)}</span></div>
-              <Slider value={[s.rate * 100]} min={1} max={25} step={0.5} onValueChange={([v]) => setScenarios(scenarios.map((x, j) => (j === i ? { ...x, rate: v / 100 } : x)))} />
+              <Slider value={[s.rate * 100]} min={1} max={25} step={0.5} onValueChange={([v]) => setScenarios(scenarios.map((x, j) => (j === i ? { ...x, rate: (v ?? 0) / 100 } : x)))} />
             </div>
           ))}
           <Button variant="ghost" size="sm" className="gap-2" onClick={() => setScenarios(DEFAULT_SCENARIOS)}><RotateCcw className="h-3.5 w-3.5" /> Reset to 6 / 10 / 14%</Button>
@@ -159,7 +159,7 @@ function Breakdown({ monthly, years, scenarios, expected, series }: { monthly: n
     m,
     year: series.find((p) => p.expected >= m)?.year,
   }));
-  const rate = scenarios[1].rate;
+  const rate = scenarios[1]!.rate;
   const extraYearCorpus = futureValue(monthly, years + 1, rate) - expected.final_corpus;
 
   return (
